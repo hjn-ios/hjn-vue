@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
 import Home from './views/Home.vue'
+import User from './views/User.vue'
 
 Vue.use(Router)
 
@@ -13,7 +14,30 @@ export default new Router({
     },
     {
       path: '/home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: '/user',
+          component: User
+        }
+      ]
+    },
+    {
+      path: '/',
+      redirect: '/home'
     }
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/login') {
+//     next()
+//     return
+//   }
+//   if (localStorage.getItem('token')) {
+//     next()
+//   } else {
+//     router.push('/login')
+//   }
+// })
+// export default router
